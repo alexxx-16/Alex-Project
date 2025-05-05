@@ -1,0 +1,36 @@
+html {
+  background-color: black;
+  font-size: 1.5rem;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+
+body {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+h1 {
+  color: hotpink;
+}
+
+h3 {
+  color: hotpink;
+}
+
+button:hover {
+  box-shadow: 0 0 30px aqua;
+  /* transform: translateY(-2px); */
+}
