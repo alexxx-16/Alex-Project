@@ -1,0 +1,43 @@
+header .header-top {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+header {
+    height: 50px;
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+}
+
+* {
+   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 1;
+}
+
+footer {
+    height: 70px;
+}
+
+main input {
+    font-size: 40px;
+    /* color: plum; */
+}
+
+::placeholder {
+    color: plum;
+}
+
+textarea {
+    font-size: 30px;
+}

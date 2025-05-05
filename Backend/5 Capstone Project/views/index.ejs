@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alex's Project</title>
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <h1>Choose your joke!</h1>
+    <form action="/GetYourJoke" method="POST">
+      <div class="category">
+        <label>Chooise your joke categories:</label><br />
+        <input
+          type="checkbox"
+          name="category"
+          value="Programming"
+          id="Programming"
+        />
+        <label for="Programming">Programming</label><br />
+
+        <input type="checkbox" name="category" value="Misc" id="Misc" />
+        <label for="Misc">Misc</label><br />
+
+        <input type="checkbox" name="category" value="Dark" id="Dark" />
+        <label for="Dark">Dark</label><br />
+
+        <input type="checkbox" name="category" value="Pun" id="Pun" />
+        <label for="Pun">Pun</label><br />
+      </div>
+
+      <div class="flags">
+        <label>Chooise your blacklists:</label><br />
+        <input type="checkbox" name="flags" value="nsfw" id="nsfw" />
+        <label for="nsfw">nsfw</label><br />
+        <input type="checkbox" name="flags" value="religious" id="religious" />
+        <label for="Misc">religious</label><br />
+        <input type="checkbox" name="flags" value="sexist" id="sexist" />
+        <label for="Dark">sexist</label><br />
+      </div>
+
+      <button type="submit" name="type" value="twopart">Two Part</button>
+      <button type="submit" name="type" value="single">Single</button>
+    </form>
+    
+    <% if (locals.joke) { %> <% if (joke.type === "single") { %>
+    <p><%= joke.joke %></p>
+    <% } else { %>
+    <p><%= joke.setup %></p>
+    <p><%= joke.delivery %></p>
+    <% } %> <% } %>
+  </body>
+</html>

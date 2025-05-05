@@ -1,0 +1,21 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: pink;
+};
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.category {
+    border: 2px solid black;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.flags {
+    border: 2px solid black;
+    padding: 5px;
+    margin-bottom: 10px;
+}

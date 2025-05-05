@@ -1,0 +1,64 @@
+h1 {
+    color: plum;
+}
+
+body {
+    padding: 10px;
+}
+
+html {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+header input {
+    width: 30vw;
+}
+
+button {
+    font-size: 1rem;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-radius: 6px;
+    background-color: white;
+    border: 1.5px solid plum;
+
+    transition: all 0.5s;
+    /* cursor: pointer; */
+}
+
+button span {
+    /* cursor: pointer; */
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+button span:after {
+content: '\00bb';
+position: absolute;
+opacity: 0;
+top: 0;
+right: -20px;
+transition: 0.5s;
+}
+
+button:hover span {
+padding-right: 25px;
+}
+
+button:hover span:after {
+opacity: 1;
+right: 0;
+}
+
+.blogs-title {
+    display: flex;
+    justify-content:space-between;
+}

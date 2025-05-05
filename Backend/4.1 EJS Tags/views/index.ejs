@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EJS Tags</title>
+</head>
+
+<body style="background-color: black; font-size: 2rem;">
+  <h1 style="color: hotpink;">
+    <%= title %>
+  </h1>
+  <p style="color: white;">Current second:
+     <%= currentSec %>
+  </p>
+
+  <% if (currentSec % 2===0) { %> 
+  <ul> <% for(let i = 0; i < items.length; i++){ %>
+    <li style="color: white;"> <%= items[i] %> </li>
+    <% } %>
+  </ul>
+  <% } else { %>
+  <p style="color: white;">No items to display</p>
+  <% } %>
+
+  <p style="color: white;">
+     <%- htmlContent %>
+  </p>
+
+  <!-- Footer goes here -->
+   <%- include('footer.ejs') %>
+</body>
+
+</html>

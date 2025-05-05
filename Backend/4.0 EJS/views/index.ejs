@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex's Website</title>
+</head>
+<body>
+<%
+function todaysNum(){
+    const currentDate = new Date();
+    const dayOfWeek = currentDate.getDay();
+    return(dayOfWeek);
+}
+function dayName() {
+    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    return days[todaysNum()];
+}
+function isWeekend() {
+    const today = todaysNum();
+    if(today === 0 || today === 6){
+        return true;
+    }
+    return false;
+}
+%>
+
+    <% if(isWeekend()){ %>
+        <h1>
+            Today is <%= dayName() %>, chill!
+        </h1> 
+    <% } else { %>
+        <h1>
+            Today is <%= dayName() %>, keep on going!
+        </h1> 
+    <% } %>
+    
+</body>
+</html>

@@ -1,0 +1,14 @@
+<body style="background-color: black; color:hotpink">
+<br>
+<% if (locals.bmi) { %>
+    <h1>You BMI is <%= bmi %>.</h1>
+<% } else { %>
+    <h1>What are you weight and height?</h1>
+    <% } %>
+    <form action="/submit" method="POST">
+        <input type="text" name="weight" placeholder="Weight in Kg">
+        <input type="text" name="height" placeholder="Height in M">
+        <input type="submit" value="OK">
+    </form>
+
+</body>

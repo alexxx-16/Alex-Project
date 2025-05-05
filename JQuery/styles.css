@@ -1,0 +1,14 @@
+.big-title {
+    font-size: 10rem;
+    color: pink;
+    font-family:Georgia, 'Times New Roman', Times, serif
+}
+
+.big-margin {
+    margin: 50px;
+} 
+
+a {
+    color:pink;
+    text-decoration: none;
+}

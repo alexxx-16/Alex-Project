@@ -1,0 +1,86 @@
+.gradient-background {
+    background: linear-gradient(300deg, #a0ccff, #ffb7f3, #d8a5ff);
+    background-size: 180% 180%;
+    animation: gradient-animation 18s ease infinite;
+}
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero  {
+    color: white;
+}
+
+.hero p {
+    font-size: 1.5rem;
+}
+
+.intro1 h1 {
+    font-size: 3rem;
+    color:#FBB5F4;
+}
+
+.selfie {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.break {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 90px;
+    margin-top: 40px;
+}
+
+.skills {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    gap:30px;
+}
+
+.skill {
+    display: flex;
+}
+
+.description {
+    margin-left: 20px;
+    flex: 1;
+}
+
+.skills h3 {
+    color:#a0ccff;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.contact h2 {
+    font-size: 3rem;
+    color:#FBB5F4;
+}
+
+.contact h3 {
+    font-size: 2rem;
+}
+
+footer p {
+    color: white !important;
+}

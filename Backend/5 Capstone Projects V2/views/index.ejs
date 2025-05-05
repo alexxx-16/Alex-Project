@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>V2 Project</title>
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <h1>Guarantee to make you laugh!</h1>
+    <% if (locals.joke) { %>
+    <div class="display-joke">
+      <% if (joke.type === 'single') { %>
+      <p><%= joke.joke %></p>
+      <% } else { %>
+      <p><%= joke.setup %></p>
+      <p class="delivery"><%= joke.delivery %></p>
+      <% } %>
+    </div>
+    <% } %> <% if (locals.error) { %>
+    <div class="display-joke">
+      <p><%= error %></p>
+      <% } %>
+    </div>
+
+    <form action="/" method="POST">
+      <div class="options">
+        <div>
+          <label style="color: white; font-size: 1.3rem"
+            >Pick your joke type:</label
+          >
+        </div>
+          <div>
+          <input type="checkbox" id="Two Part" name="type" value="Two Part" />
+          <label for="Two Part">Two Part</label><br />
+        </div>
+        <div>
+          <input type="checkbox" id="Single" name="type" value="Single" />
+          <label for="Single">Single</label><br />
+        </div>
+        <hr />
+        <div>
+          <label style="color: white; font-size: 1.3rem"
+            >Pick your categories:</label
+          >
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            id="Programming"
+            name="category"
+            value="Programming"
+          />
+          <label for="Programming">Programming</label><br />
+        </div>
+        <div>
+          <input type="checkbox" id="Dark" name="category" value="Dark" />
+          <label for="Dark">Dark</label><br />
+        </div>
+        <div>
+          <input type="checkbox" id="Pun" name="category" value="Pun" />
+          <label for="Pun">Pun</label><br />
+        </div>
+        <div>
+          <input type="checkbox" id="Spooky" name="category" value="Spooky" />
+          <label for="Spooky">Spooky</label><br />
+        </div>
+        <hr />
+        <div>
+          <label style="color: white; font-size: 1.3rem"
+            >Pick your blacklists:</label
+          >
+        </div>
+        <div>
+          <input type="checkbox" id="nsfw" name="flags" value="nsfw" />
+          <label for="nsfw">nsfw</label><br />
+        </div>
+        <div>
+          <input type="checkbox" id="sexist" name="flags" value="sexist" />
+          <label for="sexist">sexist</label><br />
+        </div>
+        <div>
+          <input type="checkbox" id="racist" name="flags" value="racist" />
+          <label for="racist">racist</label><br />
+        </div>
+        <hr />
+        <div>
+          <button>Get Joke</button>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

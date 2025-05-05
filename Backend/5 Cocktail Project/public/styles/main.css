@@ -1,0 +1,78 @@
+html {
+    background-color: black;
+    color: white;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 1.5rem;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    color: hotpink;
+}
+
+h3 {
+    color: turquoise;
+}
+
+button {
+    background-color: black;
+    border: none;
+}
+
+.feeling-lucky {
+    position: relative;
+    display: inline-block;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: rgb(215, 215, 215);
+    overflow: hidden;
+    /* cursor:initial; */
+    transition: color 0.3s ease;
+}
+
+/* Top underline - ::before pseudo-element */
+.feeling-lucky::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, turquoise, hotpink);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    border-radius: 2px;
+}
+
+/* Bottom underline - ::after pseudo-element */
+.feeling-lucky::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, hotpink, turquoise);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+    border-radius: 2px;
+}
+
+/* Hover effect */
+.feeling-lucky:hover {
+    color: #ffffff;
+}
+
+.feeling-lucky:hover::before,
+.feeling-lucky:hover::after {
+    transform: scaleX(1);
+}
