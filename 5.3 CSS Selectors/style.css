@@ -1,7 +1,29 @@
+* {
+  text-align: center;
+}
 ol {
   margin-left: -40px;
   margin-top: -20px;
   list-style-position: inside;
 }
+/* li[draggable]{
+  color: hotpink;
+  cursor:grab;
+} */
+ 
+p {
+  color: lightcoral;
+}
 
+.note {
+  font-size: 20px;
+}
+
+#id-selector-demo {
+  color: lightseagreen;
+}
+
+li[value="4"]{
+  color:lightblue
+}
 /* Write your CSS below, don't change the rules above. */

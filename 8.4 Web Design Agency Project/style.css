@@ -10,35 +10,8 @@ body {
   flex: 1;
 }
 
-.logo {
-  height: 46px;
-}
-
 h1 {
   font-size: 5rem;
-}
-
-#creative {
-  color:darkkhaki;
-}
-
-.card {
-  width: 45%;
-}
-
-.tile-image {
-  width: 300px;
-  height: 200px;
-  float: left;
-  margin-right: 30px;
-}
-
-.right {
-  float: right;
-}
-
-.left {
-  float: left;
 }
 
 footer {
@@ -46,9 +19,39 @@ footer {
   color: midnightblue;
 }
 
-@media (max-width: 680px) {
+#creative {
+  color: rgb(197, 129, 197);
+}
+
+#design-agency {
+  display: block;
+}
+
+  .card {
+    width: 48%;
+  }
+
+.tile-image {
+  height: 200px;
+  float: left;
+  margin-right: 30px;
+}
+
+.left {
+  float:left;
+}
+
+.right {
+  float: right;
+}
+
+@media (max-width:680px) {
   .logo {
-    height: 17px;
+    width: 100px;
+  }
+
+  #creative {
+  color: rgb(111, 139, 168);
   }
 
   h1 {
@@ -58,15 +61,12 @@ footer {
 
   .card {
     width: 100%;
-    display: block;
     text-align: justify;
   }
 
   .tile-image {
     width: 100%;
+    object-fit: cover;
     margin-bottom: 30px;
-    display: inline;
-    object-fit:cover;
-  }  
-  
+  }
 }

@@ -1,22 +1,21 @@
-/* Don't change the existing CSS. */
 #outer-box {
-  background-color: purple;
+  /* border: 10px solid pink; */
+  background-color: pink;
 }
 
 .box {
-  background-color: blue;
+  background-color: lightskyblue;
   padding: 10px;
 }
 
-p {
-  color:fuchsia;
-  margin: 0;
-  padding: 0;
+.inner-box {
+  background-color: lightcoral;
 }
 
-.inner-box {
-  background-color: red;
-
+p {
+  color: yellow;
+  margin: 0;
+  padding: 0;
 }
 
 .white-text {

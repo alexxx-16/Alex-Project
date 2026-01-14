@@ -14,26 +14,28 @@ TODO: Change the background color for each device
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
   <title>Media Query</title>
   <style>
-    @media (min-width: 319px) and (max-width: 680px) {
+    body {
+      background-color: lightblue;
+    }
+
+    @media (max-width:480px) {
       body {
-      background-color:pink;
+        background-color:lightpink;
       }
     }
-    @media (min-width: 681px) and (max-width: 1200px) {
-      body {
-      background-color:hotpink;
+
+    @media (min-width:1201px)and (max-width:1600px) {
+       body {
+        background-color:plum;
       }
     }
-    @media (min-width: 1201px) and (max-width: 1600px) {
-      body {
-      background-color:deeppink;
+
+    @media (min-width:1600px) {
+       body {
+        background-color:lightslategray;
       }
     }
-    @media (min-width: 1601px) {
-      body {
-      background-color:crimson;
-      }
-    }
+
   </style>
 </head>
 

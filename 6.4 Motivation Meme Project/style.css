@@ -1,18 +1,26 @@
-body {
-    background-color: black;
+html {
     color: white;
 }
-.meme {
+
+h1 {
+ font-family: "Quintessential", serif;
+    font-weight: 400;
+    font-style: normal;
+    text-transform: capitalize;
+    color: white !important;
+}
+
+img {
+    width: 100%;
+    border: 10px solid yellow;
+    box-sizing: border-box;
+}
+
+.poster {
+    text-align: center;
+    margin-top: 10%;
+    padding:40px;
+    background-color: black;
     width: 50%;
     margin-left: 25%;
-    text-align: center;
-    margin-top: 100px;
-}
-img {
-    width:100%;
-    border: 5px solid white;
-}
-h1 {
-    font-family: "Libre Baskerville", serif;
-    text-transform: uppercase;
 }
