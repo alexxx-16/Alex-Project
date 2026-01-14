@@ -11,22 +11,28 @@
   -->
   <style>
     .container {
-      flex-direction: column;
       color: white;
-      border: 5px solid gold;
-      display: inline-flex;
+      border: 5px solid lightblue;
+      text-align: center;
+
+      display: flex;
+      /* flex-direction: column; */
+      gap: 5px;
+      height: 100px;
+      /* height: 80vh; */
     }
 
-    .container > * {
-      flex-basis: 100px;
+     .container > * {
+      /* flex-basis: 200px; */
+      /* flex-grow: 0; */
+      /* flex-shrink: 1; */
+      flex:1;
     }
 
-    /*
-Select all the elements that are the direct
-children of the .container class.
-    */
-
-    .red {background-color: #eb4d4b;}
+    .red {
+      background-color: #eb4d4b;
+      order: 1;
+    }
     .orange {background-color: #f0932b;}
     .yellow {background-color: #f6e58d;}
     .green {background-color: #6ab04c;}
