@@ -32,16 +32,22 @@
 
     .cowboy {
       background-color: #00B9FF;
-      grid-column: span 2;
+      /* grid-column: span 2; */
+      grid-area: 1 / 1 / 2 / 3;
     }
 
     .astronaut {
       background-color: #03989E;
-      order: 1;
-      grid-column: span 2;
-
+      /* order: 1; */
+      /* grid-column: span 2; */
+      grid-area: 2 / 1 / 3 / 3;
       /* TODO: Make the astronaut box look like the goal2 image. */
+    }
 
+    .book {
+      /* grid-row: span 2; */
+      background-color: #e531b55d;
+      grid-area: 1 / 2 / 3 / 4;
     }
   </style>
 </head>

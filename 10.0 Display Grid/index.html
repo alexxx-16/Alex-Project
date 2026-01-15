@@ -7,20 +7,26 @@
     /* Write your code here */
     /* Each square should be 100px by 100px */
     /* My colours for white: #f0d9b5, black: #b58863 */
-    .container {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    body {
+      margin: 0;
+      padding: 0;
     }
+
+    .container {
+      border: 20px solid darkred;
+      display: grid;
+      width: 800px;
+      height: 800px;
+      grid-template-columns: repeat(8,1fr);
+      /* grid-template-rows: repeat(8,1fr); */
+    }
+
     .white {
       background-color: #f0d9b5;
-      height: 100px;
-      width: 100px;
     }
+
     .black {
-      background-color:#b58863;
-      height:100px;
-      width: 100px;
+      background-color: #b58863;
     }
   </style>
 </head>
