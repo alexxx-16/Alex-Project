@@ -1,16 +1,21 @@
-var ranNum1 = Math.ceil(Math.random() * 6);
-var ranNum2 = Math.ceil(Math.random() * 6);
+function diceGame() {
+  const dice1Number = Math.floor(Math.random() * 6 + 1);
+  const dice2Number = Math.floor(Math.random() * 6 + 1);
 
-var ranImg1 = "./images/dice" + ranNum1 + ".png";
-var ranImg2 = "./images/dice" + ranNum2 + ".png";
+  document
+    .querySelector(".img1")
+    .setAttribute("src", `./images/dice${dice1Number}.png`);
+  document
+    .querySelector(".img2")
+    .setAttribute("src", `./images/dice${dice2Number}.png`);
 
-document.getElementsByClassName("img1")[0].setAttribute("src",ranImg1);
-document.getElementsByClassName("img2")[0].setAttribute("src",ranImg2);
+  const message = document.querySelector("h1");
 
-if(ranNum1 > ranNum2){
-    document.querySelector("h1").textContent = "Player 1 won!";
-} else if(ranNum2 > ranNum1){
-    document.querySelector("h1").textContent = "Player 2 won!";
-} else {
-    document.querySelector("h1").textContent = "It's a tie!";
+  dice1Number > dice2Number
+    ? (message.textContent = "🚩 Player One Wins!")
+    : dice2Number > dice1Number
+      ? (message.textContent = "Player Two Wins! 🚩")
+      : (message.textContent = "It's a Draw");
 }
+
+diceGame();
