@@ -1,11 +1,20 @@
-const fs = require("fs");
+import { readFile, writeFile, appendFile } from "node:fs/promises";
+import { resolve } from "node:path";
 
-fs.writeFile("messageFromAlex.txt", "Hello from the real Alex!", (err) => {
-    if (err) throw err;
-    console.log('The file has been saved!');
-});
+const __dirname = import.meta.dirname;
+const filePath = resolve(__dirname, "message.txt");
+const myFilePath = resolve(__dirname, "myMessage.txt");
 
-fs.readFile("messageFromAlex.txt", "utf8", (err, data) => {
-    if (err) throw err;
-    console.log(data);
-}); 
+try {
+  await appendFile(filePath, "Hello from Alex!\n");
+  console.log("Append successful.");
+
+  await writeFile(myFilePath, "Hello from Alex.", "utf8");
+  console.log("Filed created successfully.");
+
+  console.log(
+    `Current content:\n ${await readFile(filePath, "utf8")}New content:\n${await readFile(myFilePath, "utf8")}`,
+  );
+} catch (error) {
+  console.error("File system error: ", error.message);
+}

@@ -1,29 +1,23 @@
-/* 
-1. Use the inquirer npm package to get user input.
-2. Use the qr-image npm package to turn the user entered URL into a QR code image.
-3. Create a txt file to save the user input using the native fs node module.
-*/
+import { writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
+import { createWriteStream } from "node:fs";
+import { pipeline } from "node:stream/promises";
+import { input } from "@inquirer/prompts";
+import qr from "qr-image";
 
-import inquirer from 'inquirer';
-import qr from 'qr-image';
-import fs from 'fs';
+const __dirname = import.meta.dirname;
+const txtPath = resolve(__dirname, "user-qr-code.txt");
+const imgPath = resolve(__dirname, "user-qr-code.png");
 
-inquirer
-  .prompt([
-    {
-        type:'input',
-        name: 'url',
-        message: 'What is your favourite website?',
-    }
-])
-  .then((answers) => {
-    console.log(answers);
-    const qrCode = qr.image(answers.url);
-    qrCode.pipe(fs.createWriteStream('answer.png'));
-    fs.writeFile('answers.txt', answers.url, function(){
-        console.log('File saved.');
-    })
-})
-  .catch((error) => {
-     console.log(error)
-  });
+try {
+  const answer = await input({ message: "What's your favourite website?" });
+  //   console.log(answer);
+  const userQR = qr.image(answer, { type: "png" });
+
+  await Promise.all([
+    pipeline(userQR, createWriteStream(imgPath)),
+    writeFile(txtPath, answer),
+  ]);
+} catch (error) {
+  console.error(`An error occurred: ${error.message}`);
+}

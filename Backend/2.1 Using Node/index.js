@@ -1,1 +1,1 @@
-console.log("Hello from node~");
+console.log("Hello! ", "What's going on?");
