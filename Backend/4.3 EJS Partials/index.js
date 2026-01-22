@@ -1,20 +1,26 @@
 import express from "express";
+import { resolve } from "node:path";
 
 const app = express();
-const port = 3000;
-app.use(express.static("public"));
+const port = process.env.PORT || 3000;
+const __dirname = import.meta.dirname;
+
+app.use(express.static(resolve(__dirname, "public")));
+
+app.set("view engine", "ejs");
+app.set("views", resolve(__dirname, "views"));
 
 app.get("/", (req, res) => {
-  res.render("index.ejs")
-})
+  res.render("index");
+});
 
 app.get("/about", (req, res) => {
-  res.render("about.ejs");
-})
+  res.render("about");
+});
 
 app.get("/contact", (req, res) => {
-  res.render("contact.ejs");
-})
+  res.render("contact");
+});
 
 /* Write your code here:
 Step 1: Render the home page "/" index.ejs

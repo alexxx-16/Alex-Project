@@ -1,33 +1,34 @@
-//To see how the final website should work, run "node solution.js".
-//Make sure you have installed all the dependencies with "npm i".
-//The password is ILoveProgramming
-
 import express from "express";
-import { dirname } from "path"
-import { fileURLToPath } from "url";
-import bodyParser from "body-parser";
+import { resolve } from "node:path";
+import morgan from "morgan";
 
-const root = dirname(fileURLToPath(import.meta.url));
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+const __dirname = import.meta.dirname;
+
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(resolve(__dirname, "public")));
 
 app.get("/", (req, res) => {
-    res.sendFile(root + "/public/index.html");
-})
+  res.sendFile(resolve(__dirname, "public", "index.html"));
+});
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.post("/check", (req, res) => {
+  if (req.body.password === "ILoveProgramming") {
+    console.log("Password correct.");
+    res.sendFile(resolve(__dirname, "public", "secret.html"));
+  } else {
+    console.log(`Wrong password entered: ${req.body.password}`);
+    res.send("<h1>Sorry wrong password.</h1><a href='/'>Try again</a>");
+  }
+});
 
-function passwordCheck(req, res, next){
-    if(req.body.password === "ILoveProgramming"){
-        res.sendFile(root + "/public/secret.html");
-    } else {
-    console.log(req.body);
-    res.redirect("/");
-    }
-}
-
-app.post("/check", passwordCheck);
+app.use((req, res) => {
+  res.status(404).send("<h1>Page not found.</h1>");
+});
 
 app.listen(port, () => {
-    console.log(`Listening to port ${port}`);
-})
+  console.log(`Server running on port ${port}.`);
+});

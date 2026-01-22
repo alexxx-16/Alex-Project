@@ -1,5 +1,5 @@
-import { writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { writeFile } from "node:fs/promises";
 import { createWriteStream } from "node:fs";
 import { pipeline } from "node:stream/promises";
 import { input } from "@inquirer/prompts";

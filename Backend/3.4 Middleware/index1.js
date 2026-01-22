@@ -1,23 +1,24 @@
 import express from "express";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import bodyParser from "body-parser";
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import { resolve } from "node:path";
+import morgan from "morgan";
+const __dirname = import.meta.dirname;
 
 const app = express();
 const port = 3000;
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("combined"));
+
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/public/index.html");
+  res.sendFile(resolve(__dirname, "public/index.html"));
 });
 
-app.use(bodyParser.urlencoded({extended: true}))
-app.post("/submit", (req, res) => { 
+app.post("/submit", (req, res) => {
   console.log(req.body);
-  res.sendStatus(200);
-})
+  res.redirect("/");
+});
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
-  

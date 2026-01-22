@@ -1,19 +1,22 @@
-import express from 'express';
+import express from "express";
 const app = express();
 const port = 3000;
 
-app.get('/', (req, res) => {
-    res.send('<h1>Hey there. This is Alex.<h1>')
-  })
+app.get("/", (req, res) => {
+  //   console.log(req.rawHeaders);
+  res.send("<h1>Hello<h1>");
+});
 
-app.get('/about', (req, res) => {
-    res.send('<h1>This is about Alex.<h1>')
-  })
-  
-app.get('/contact', (req, res) => {
-    res.send('<h2>You can contact me on</h2><p>0424 691 877<p>');
-})
+app.get("/about", (req, res) => {
+  res.send(
+    `<h1 style="color:plum">This is the About Page</h1><p>My name is Alex</p>`,
+  );
+});
 
-  app.listen(port, () => {
-    console.log(`Listening on port ${port}`)
-  })
+app.get("/contact", (req, res) => {
+  res.send("<h1>This is the Contact Page</h1>");
+});
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});

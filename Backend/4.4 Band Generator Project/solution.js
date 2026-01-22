@@ -26,7 +26,7 @@ app.listen(port, () => {
 
 const adj = [
   "abandoned",
-  "able", 
+  "able",
   "absolute",
   "adorable",
   "adventurous",
