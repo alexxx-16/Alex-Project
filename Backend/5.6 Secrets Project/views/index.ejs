@@ -14,13 +14,17 @@
 <body>
   <h1>What's your secret?</h1>
   <div class="card">
+    <% if (locals.secret){%>
     <p>
       <%= secret %>
     </p>
+    <% } %>
   </div>
+  <% if(locals.user){ %>
   <p class="user">
     <%= user %>
   </p>
+  <% } %>
 </body>
 
 </html>

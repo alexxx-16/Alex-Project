@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alex's News</title>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&display=swap" rel="stylesheet">
+    <script src="client.js" defer></script>
+  </head>
+
+  <body>
+    <div id="loading-overlay" class="loading-hidden">
+      <div class="spinner"></div>
+      <p>Fetching the latest news...</p>
+    </div>
+
+    <% if (!locals.news){ %>
+    <div class="web-title-container">
+      <h1>Welcome to Alex's News</h1>
+        <form action="/getNews" method="POST">
+          <div class="button-container">
+            <button name="topic" value="australia">Australia</button>
+            <button name="topic" value="business">Business</button>
+            <button name="topic" value="debate">Debate</button>
+            <button name="topic" value="economy">Economy</button>
+            <button name="topic" value="education">Education</button>
+            <button name="topic" value="environment">Environment</button>
+            <button name="topic" value="immigration">Immigration</button>
+            <button name="topic" value="politics">Politics</button>
+            <button name="topic" value="technology">Technology</button>
+          </div>
+        </form>
+      </div>
+      <% } else {%>
+        <div class="web-title-container">
+          <div class="back-button-container">
+            <a href="/" class="back-button">← Back to Home</a>
+          </div>
+          <h2>Latest <%= topic.charAt(0).toUpperCase()+topic.slice(1) %> news</h2>
+          <ol>
+          <% news.forEach((article)=>{ %>
+            <li><a href="<%= article.webUrl%>">
+              <%= article.webTitle %>
+            </a></li>
+          <% }) %>
+          </ol>
+        </div>
+      <% } %>
+  </body>
+</html>

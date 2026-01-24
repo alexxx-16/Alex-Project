@@ -7,7 +7,7 @@ const port = 3000;
 const API_URL = "https://secrets-api.appbrewery.com";
 
 //Add your own bearer token from the previous lesson.
-const yourBearerToken = "3858d94a-ec37-4c0c-8835-31a20128d9c4";
+const yourBearerToken = "3e5135db-12f8-4314-bf49-5160b3dea352";
 const config = {
   headers: { Authorization: `Bearer ${yourBearerToken}` },
 };
@@ -43,7 +43,7 @@ app.post("/put-secret", async (req, res) => {
     const result = await axios.put(
       API_URL + "/secrets/" + searchId,
       req.body,
-      config
+      config,
     );
     res.render("index.ejs", { content: JSON.stringify(result.data) });
   } catch (error) {
@@ -57,7 +57,7 @@ app.post("/patch-secret", async (req, res) => {
     const result = await axios.patch(
       API_URL + "/secrets/" + searchId,
       req.body,
-      config
+      config,
     );
     res.render("index.ejs", { content: JSON.stringify(result.data) });
   } catch (error) {

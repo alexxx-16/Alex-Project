@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Taco Recipes</title>
+    <link rel="stylesheet" type="text/css" href="/styles/main.css" />
+  </head>
 
-<head>
-  <title>Taco Recipes</title>
-  <link rel="stylesheet" type="text/css" href="/styles/main.css">
-</head>
+  <body>
+    <h1>Taco Town 🌮</h1>
 
-<body>
-  <h1>Taco Town 🌮</h1>
-
-  <form action="/recipe" method="POST" class="buttons">
-    <button type="submit" value="chicken" name="choice">🍗</button>
-    <button type="submit" value="beef" name="choice">🥩</button>
-    <button type="submit" value="fish" name="choice">🐟</button>
-  </form>
-  <div id="recipeContainer" class="hidden">
-    <% if (!locals.recipe){ %>
+    <form action="/recipe" method="POST" class="buttons">
+      <button type="submit" value="chicken" name="choice">🍗</button>
+      <button type="submit" value="beef" name="choice">🥩</button>
+      <button type="submit" value="fish" name="choice">🐟</button>
+    </form>
+    <div id="recipeContainer" class="hidden">
+      <% if(!locals.name) { %>
       <h2>Pick your favourite taco ingredient 👆</h2>
-    <% } else { %>
-      <h2><%= recipe.name %></h2>
-      <h3>Ingredients:</h3>
+      <% } else if(locals.error) { %>
+        <p><%= error %></p>
+        <% } else { %>
+      <h2><%= name %></h2>
       <ul id="ingredientsList">
-        <li><%= recipe.ingredients.protein.name %>, <%= recipe.ingredients.protein.preparation %></li>
-        <li><%= recipe.ingredients.salsa.name %></li>
-        <% recipe.ingredients.toppings.forEach(topping => { %>
-        <li> <%= topping.quantity %> of <%= topping.name %></li>
-        <% }); %>
-      </ul>
-    <% } %>
-  </div>
-</body>
-
+        <li><%= protein %>. <%= preparation %></li>
+        <li><%= salsa %></li>
+        <% toppings.forEach(topping => { %>
+          <li><%= topping.quantity %> of <%= topping.name %></li>
+        <% });%> 
+        </ul>
+        <% } %>
+      
+     
+        
+    </div>
+  </body>
 </html>

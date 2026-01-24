@@ -1,39 +1,48 @@
 import express from "express";
-import bodyParser from "body-parser";
+import { resolve } from "node:path";
+import { type } from "node:os";
+import recipe from "./recipe.json" with { type: "json" };
+import morgan from "morgan";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+const __dirname = import.meta.dirname;
 
-//Step 1: Run the solution.js file without looking at the code.
-//Step 2: You can go to the recipe.json file to see the full structure of the recipeJSON below.
-const recipeJSON =
-  '[{"id": "0001","type": "taco","name": "Chicken Taco","price": 2.99,"ingredients": {"protein": {"name": "Chicken","preparation": "Grilled"},  "salsa": {"name": "Tomato Salsa","spiciness": "Medium"},  "toppings": [{"name": "Lettuce",  "quantity": "1 cup",  "ingredients": ["Iceberg Lettuce"]  },      {"name": "Cheese",  "quantity": "1/2 cup",  "ingredients": ["Cheddar Cheese", "Monterey Jack Cheese"]  },      {"name": "Guacamole",  "quantity": "2 tablespoons",  "ingredients": ["Avocado", "Lime Juice", "Salt", "Onion", "Cilantro"]  },      {"name": "Sour Cream",  "quantity": "2 tablespoons",  "ingredients": ["Sour Cream"]  }      ]    }  },{"id": "0002","type": "taco","name": "Beef Taco","price": 3.49,"ingredients": {"protein": {"name": "Beef","preparation": "Seasoned and Grilled"},  "salsa": {"name": "Salsa Verde","spiciness": "Hot"},  "toppings": [{"name": "Onions",  "quantity": "1/4 cup",  "ingredients": ["White Onion", "Red Onion"]  },      {"name": "Cilantro",  "quantity": "2 tablespoons",  "ingredients": ["Fresh Cilantro"]  },      {"name": "Queso Fresco",  "quantity": "1/4 cup",  "ingredients": ["Queso Fresco"]  }      ]    }  },{"id": "0003","type": "taco","name": "Fish Taco","price": 4.99,"ingredients": {"protein": {"name": "Fish","preparation": "Battered and Fried"},  "salsa": {"name": "Chipotle Mayo","spiciness": "Mild"},  "toppings": [{"name": "Cabbage Slaw",  "quantity": "1 cup",  "ingredients": [    "Shredded Cabbage",    "Carrot",    "Mayonnaise",    "Lime Juice",    "Salt"          ]  },      {"name": "Pico de Gallo",  "quantity": "1/2 cup",  "ingredients": ["Tomato", "Onion", "Cilantro", "Lime Juice", "Salt"]  },      {"name": "Lime Crema",  "quantity": "2 tablespoons",  "ingredients": ["Sour Cream", "Lime Juice", "Salt"]  }      ]    }  }]';
+app.set("view engine", "ejs");
+app.set("views", resolve(__dirname, "views"));
 
-app.use(express.static("public"));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(resolve(__dirname, "public")));
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
-  res.render("index.ejs");
+  res.render("index");
 });
 
-// 1.'/receipe' endpoint receives a choice by user
-// 2.find recipe with matching ingredients name
-// 3.pass the recipe to index.ejs
-// 4.index.ejs to show ingredients, preparation, salsaa etc.
 app.post("/recipe", (req, res) => {
-  const recipes = JSON.parse(recipeJSON)
-  recipes.forEach(recipe => {
-    if (recipe.ingredients.protein.name.toLowerCase() === req.body.choice)
-      {
-        res.render('index.ejs',
-          {
-            recipe: recipe
-        })
-      }
-    });
+  const userChoice = req.body.choice;
+  const chosenRecipe = recipe.find((taco) => {
+    return taco.ingredients.protein.name.toLowerCase() === userChoice;
+  });
 
-  //Step 3: Write your code here to make this behave like the solution website.
-  //Step 4: Add code to views/index.ejs to use the recieved recipe object.
+  if (!chosenRecipe) {
+    res.render("index", {
+      name: "Taco not found",
+      error: "Please try another recipe.",
+    });
+  }
+
+  res.render("index", {
+    name: chosenRecipe.name,
+    protein: chosenRecipe.ingredients.protein.name,
+    preparation: chosenRecipe.ingredients.protein.preparation,
+    salsa: chosenRecipe.ingredients.salsa.name,
+    toppings: chosenRecipe.ingredients.toppings,
+  });
+});
+
+app.get("/recipe", (req, res) => {
+  res.redirect("/");
 });
 
 app.listen(port, () => {

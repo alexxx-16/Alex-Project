@@ -1,23 +1,23 @@
 import express from "express";
 import axios from "axios";
-import bodyParser from "body-parser";
+import { resolve } from "node:path";
+import morgan from "morgan";
+import "dotenv/config";
 
 const app = express();
-const port = 3000;
-const API_URL = "https://secrets-api.appbrewery.com";
-
-// HINTs: Use the axios documentation as well as the video lesson to help you.
-// https://axios-http.com/docs/post_example
-// Use the Secrets API documentation to figure out what each route expects and how to work with it.
-// https://secrets-api.appbrewery.com/
-
-//TODO 1: Add your own bearer token from the previous lesson.
-const yourBearerToken = "3858d94a-ec37-4c0c-8835-31a20128d9c4";
+const port = process.env.PORT || 3001;
+const __dirname = import.meta.dirname;
+const API_URL = process.env.API_URL;
+const yourBearerToken = process.env.BEARER_TOKEN;
 const config = {
   headers: { Authorization: `Bearer ${yourBearerToken}` },
 };
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.set("view engine", "ejs");
+app.set("views", resolve(__dirname, "views"));
+
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
   res.render("index.ejs", { content: "Waiting for data..." });
@@ -25,78 +25,94 @@ app.get("/", (req, res) => {
 
 app.post("/get-secret", async (req, res) => {
   try {
-    const response = await axios.get(`${API_URL}/secrets/${req.body.id}`,config);
-    res.render("index.ejs", 
-      { 
-        'content': JSON.stringify(response.data) 
-      }
-    );
+    const { id } = req.body;
+    const response = await axios.get(`${API_URL}/secrets/${id}`, config);
+    res.render("index", {
+      content: JSON.stringify(response.data),
+    });
   } catch (error) {
-    res.render("index.ejs", 
-      { 
-        'content': JSON.stringify(error.response.data) 
-      }
-    );
+    res.render("index", {
+      content: error.response?.data?.message || "Secret not found",
+    });
   }
 });
 
 app.post("/post-secret", async (req, res) => {
   try {
-    const response = await axios.post(`${API_URL}/secrets`, 
-      {
-        'secret': req.body.secret,
-        'score': req.body.score
-      },
-      config)
-    res.render('index.ejs', {
-      content: JSON.stringify(response.data)
-    })
-  } catch(error) {
-    console.log(error)
+    const { secret, score } = req.body;
+    if (!secret || !score) {
+      return res.render("index", {
+        content: "Please provide both Secret and Score.",
+      });
     }
+    const response = await axios.post(`${API_URL}/secrets`, req.body, config);
+    res.render("index", {
+      content: JSON.stringify(response.data),
+    });
+  } catch (error) {
+    res.render("index", {
+      content: error.response?.data?.message || "Secret not found",
+    });
+  }
 });
 
 app.post("/put-secret", async (req, res) => {
+  const { id, ...bodyData } = req.body;
+  console.log(req.body);
+
   try {
-    const response = await axios.put(`${API_URL}/secrets/${req.body.id}`, req.body, config);
-    res.render("index.ejs", { 
-      'content': JSON.stringify(response.data) 
+    const response = await axios.put(
+      `${API_URL}/secrets/${id}`,
+      bodyData,
+      config,
+    );
+    res.render("index", {
+      content: JSON.stringify(response.data),
     });
   } catch (error) {
-    res.render("index.ejs", { 
-      'content': JSON.stringify(error.response.data) 
+    console.error(error.message);
+
+    res.render("index", {
+      content: error.message || "Secret not found.",
     });
   }
 });
 
 app.post("/patch-secret", async (req, res) => {
-  console.log(req.body)
+  const { id, secret, score } = req.body;
+  const patchData = {};
+  if (secret) patchData.secret = secret;
+  if (score) patchData.score = Number(score);
+
   try {
-    await axios.patch(`${API_URL}/secrets/${req.body.id}`, req.body, config);
-    const updatedSecret = await axios.get(`${API_URL}/secrets/${req.body.id}`, config);
-    res.render('index.ejs', {
-      'content': JSON.stringify(updatedSecret.data)
-    })
-  } catch(error) {
-    res.render('index.ejs', {
-      'content': JSON.stringify(error.response.data)
-    })
+    const response = await axios.patch(
+      `${API_URL}/secrets/${id}`,
+      patchData,
+      config,
+    );
+    res.render("index", { content: JSON.stringify(response.data) });
+  } catch (error) {
+    console.error(error.message);
+
+    res.render("index", {
+      content: error.message || "Secret not found.",
+    });
   }
 });
 
 app.post("/delete-secret", async (req, res) => {
+  const { id } = req.body;
   try {
-    const response = await axios.delete(`${API_URL}/secrets/${req.body.id}`, config)
-    res.render('index.ejs', {
-      'content': JSON.stringify(response.data.message)
-    })
-  } catch(error) {
-    res.render('index.ejs', {
-      'content': JSON.stringify(error.response.data)
-    })
+    const response = await axios.delete(`${API_URL}/secrets/${id}`, config);
+    res.render("index", {
+      content: `Secret with the ID of ${id} has been deleted.`,
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.render("index", { content: error.message || "Secret not found." });
   }
 });
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on: http://localhost:${port}`);
 });

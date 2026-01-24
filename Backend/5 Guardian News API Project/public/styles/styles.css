@@ -1,0 +1,219 @@
+body::before {
+    content: "";
+    position: fixed; /* Fixes it to the viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='29' height='33.487' patternTransform='scale(3) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='%235b666bff'/><path d='M29 20.928v14.813M14.5 12.56v16.745M29-2.559v6.744l-14.5 8.374L0 4.189v-6.745m29 6.742l14.5 8.37m0 16.745L29 20.928l-14.5 8.376L0 20.931l-14.5 8.376m0-16.744L0 4.189m0 31.487V20.931'  stroke-width='1' stroke='%23fff5f03e' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(-114,-200.92200000000003)' fill='url(%23a)'/></svg>");
+    background-repeat: repeat;
+    pointer-events: none; /* Ensures it doesn't interfere with clicks */
+}
+
+html, body {
+    font-family: "JetBrains Mono", monospace;
+    cursor: url("../icons/pen.svg") 0 32, auto;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 5rem;
+    color:#2C3336;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    margin: 0;
+    text-align: center;
+}
+
+h2 {
+    font-size: 3rem;
+    color:#2C3336;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    margin: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color:#2C3336;
+    cursor: inherit;
+}
+
+.web-title-container {
+    background-color: #ffffffba;
+    backdrop-filter: blur(2px);
+    padding: 20px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 1000px;
+}
+
+.back-button-container {
+    width:100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.button-container {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 1.2rem;
+    justify-content: center;
+}
+
+.back-button {
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    transform: translateX(-5px);
+}
+
+button {
+    font-size: 1.2rem;
+    color:#2C3336;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    border: none;
+    border-radius: 5px;
+    padding: 11px 20px;
+    cursor: inherit;
+}
+
+button:hover {
+    background-color: #5b666bff;
+    color: white;
+    transition: 0.3s;;
+}
+
+ol { 
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    padding: 5px;
+    transition: all 0.3s ease;
+    list-style-position: inside;
+}
+
+li:hover {
+    background-color: #ffffffa0;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+#loading-overlay {
+    position: fixed;
+    top: 25%;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: #ffffffba;
+    backdrop-filter: blur(2px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    font-size: 1.5rem;
+    color: #2C3336;
+}
+
+.loading-hidden {
+    display: none !important;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #5b666bff;
+    border-top: 5px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+    border-top-color: #5b666bff;
+    border-width: 5px;
+  }
+  50% {
+    transform: rotate(180deg);
+    border-top-color: #2C3336;
+    border-width: 8px; /* Line gets thicker halfway through */
+  }
+  100% {
+    transform: rotate(360deg);
+    border-top-color: #5b666bff;
+    border-width: 5px;
+  }
+}
+
+
+@media (max-width:768px){
+    h1 {
+        font-size: 3.5rem;
+    }
+
+    #loading-overlay {
+        top:0;
+        height: 100%;
+    }
+
+    .web-title-container {
+        width: 95%;
+        padding: 20px 20px;
+        min-height: 40vh;
+        box-sizing: border-box;
+    }
+
+    .button-container{
+        flex-direction: column;
+        width: 100%;
+        max-width: 400px;
+        gap: 0.8rem;
+    }
+
+    button {
+        width: 100%;
+        box-sizing: border-box; 
+        padding: 15px 20px;
+        font-size: 1.4rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+        margin-top: 5px;
+        margin-bottom: 25px;
+    }
+
+    li{
+        margin-bottom: 1.5rem;
+    }
+
+    li a {
+        display: block;
+    }
+}
