@@ -13,7 +13,6 @@ body::before {
 
 html, body {
     font-family: "JetBrains Mono", monospace;
-    cursor: url("../icons/pen.svg") 0 32, auto;
 }
 
 body {
@@ -47,7 +46,6 @@ h2 {
 a {
     text-decoration: none;
     color:#2C3336;
-    cursor: inherit;
 }
 
 .web-title-container {
@@ -94,7 +92,6 @@ button {
     border: none;
     border-radius: 5px;
     padding: 11px 20px;
-    cursor: inherit;
 }
 
 button:hover {

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alex's Booknotes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Questrial&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+
+  <body>
+    <h1 id="web-title">Alex's Booknotes</h1>
+    <hr class="line" />
+    <% if(locals.books){ %> 
+        <%  books.forEach((book) => { %>
+        <div class="notes-container">
+      <h2><%= book.title %></h2>
+      <div id="info">
+        <p>
+        Date read: <%= book.date.toLocaleDateString('en-GB') %>. </p>   
+        <p>How strongly I recommend it: <%= book.rating %> /10 </p>
+      </div>
+      <p><%= book.review  %></p>
+    </div>
+    <% }); %>
+        <% } %>
+  </body>
+</html>
