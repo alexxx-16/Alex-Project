@@ -45,7 +45,9 @@ app.get("/posts", (req, res) => {
 //CHALLENGE 2: GET a specific post by id
 app.get("/posts/:id", (req, res) => {
   const id = parseInt(req.params.id);
-  res.json(posts.find((post) => post.id === id));
+  const post = posts.find((post) => post.id === id);
+  if (!post) return res.status(404).json({ message: "Post not found." });
+  res.json(post);
 });
 
 //CHALLENGE 3: POST a new post
@@ -67,6 +69,9 @@ app.patch("/posts/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const { title, content, author } = req.body;
   const targetPost = posts.find((post) => post.id === id);
+
+  if (!targetPost) return res.status(404).json({ message: "Post not found." });
+
   if (title) targetPost.title = title;
   if (content) targetPost.content = content;
   if (author) targetPost.author = author;
@@ -77,6 +82,10 @@ app.patch("/posts/:id", (req, res) => {
 app.delete("/posts/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const targetPostIndex = posts.findIndex((post) => post.id === id);
+
+  if (targetPostIndex === -1)
+    return res.status(404).json({ message: "Post not found." });
+
   posts.splice(targetPostIndex, 1);
   res.send(`Post with the ID of ${id} has been deleted.`);
 });

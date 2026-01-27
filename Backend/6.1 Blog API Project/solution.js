@@ -35,6 +35,7 @@ let lastId = 3;
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // GET all posts
 app.get("/posts", (req, res) => {

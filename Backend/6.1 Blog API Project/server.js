@@ -2,11 +2,12 @@ import express from "express";
 import { resolve } from "node:path";
 import axios from "axios";
 import morgan from "morgan";
+import "dotenv/config";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3001;
 const __dirname = import.meta.dirname;
-const API_URL = "http://localhost:4000";
+const API_URL = process.env.API_URL;
 
 app.set("view engine", "ejs");
 app.set("views", resolve(__dirname, "views"));
