@@ -16,7 +16,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 const __dirname = import.meta.dirname;
 
-app.set("view engine", "views");
+app.set("view engine", "ejs");
 app.set("views", resolve(__dirname, "views"));
 
 app.use(morgan("dev"));

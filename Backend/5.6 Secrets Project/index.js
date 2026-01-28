@@ -9,7 +9,7 @@ const port = process.env.PORT || 3001;
 const __dirname = import.meta.dirname;
 const secretAPI = axios.create({
   baseURL: process.env.API_URL,
-  timeout: 2000,
+  timeout: 5000,
 });
 
 app.set("view engine", "ejs");
